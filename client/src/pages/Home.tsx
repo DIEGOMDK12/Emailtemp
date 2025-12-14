@@ -79,6 +79,29 @@ export default function Home() {
     },
   });
 
+  const sendTestEmailMutation = useMutation({
+    mutationFn: async () => {
+      const testEmails = [
+        { from: "netflix@netflix.com", subject: "Confirme seu email", textBody: "Clique no link para confirmar sua conta Netflix." },
+        { from: "spotify@spotify.com", subject: "Bem-vindo ao Spotify!", textBody: "Sua conta foi criada com sucesso. Aproveite milhões de músicas!" },
+        { from: "amazon@amazon.com.br", subject: "Seu pedido foi confirmado", textBody: "Obrigado pela sua compra! Seu pedido será enviado em breve." },
+        { from: "suporte@banco.com", subject: "Código de verificação: 847291", textBody: "Use o código 847291 para confirmar sua identidade." },
+        { from: "noreply@instagram.com", subject: "Solicitação de redefinição de senha", textBody: "Você solicitou a redefinição da sua senha. Clique no link abaixo." },
+      ];
+      const randomEmail = testEmails[Math.floor(Math.random() * testEmails.length)];
+      await apiRequest("POST", "/api/receive", {
+        to: address,
+        ...randomEmail,
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Email de teste enviado!",
+        description: "Verifique sua caixa de entrada",
+      });
+    },
+  });
+
   useEffect(() => {
     generateAddressMutation.mutate();
   }, []);
@@ -197,6 +220,9 @@ export default function Home() {
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => sendTestEmailMutation.mutate()} data-testid="button-test-email">
+            Testar
+          </Button>
           <Button variant="outline" onClick={handleGenerateNew} data-testid="button-generate-new">
             Novo E-mail
           </Button>
