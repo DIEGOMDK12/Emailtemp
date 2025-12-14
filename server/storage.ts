@@ -36,7 +36,7 @@ export class MemStorage implements IStorage {
   }
 
   createTempAddress(): TempAddress {
-    const address = `${generateRandomString(10)}@tempmail.io`;
+    const address = `${generateRandomString(10)}@qlqcoosa.com`;
     const now = new Date();
     const tempAddress: TempAddress = {
       address,
