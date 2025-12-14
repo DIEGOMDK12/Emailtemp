@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const emailSchema = z.object({
   id: z.string(),
-  to: z.string().email(),
+  to: z.string(),
   from: z.string(),
   subject: z.string(),
   textBody: z.string().optional(),
@@ -14,7 +14,7 @@ export const emailSchema = z.object({
 export const insertEmailSchema = emailSchema.omit({ id: true, isRead: true, timestamp: true });
 
 export const tempAddressSchema = z.object({
-  address: z.string().email(),
+  address: z.string(),
   createdAt: z.string(),
   expiresAt: z.string(),
 });
