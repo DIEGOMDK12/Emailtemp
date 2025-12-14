@@ -135,5 +135,41 @@ export async function registerRoutes(
     res.json({ success: true, emailId: email.id });
   });
 
+  app.post("/api/mailgun/webhook", (req, res) => {
+    try {
+      const recipient = req.body.recipient || req.body.To;
+      const sender = req.body.sender || req.body.From || "unknown@unknown.com";
+      const subject = req.body.subject || req.body.Subject || "(Sem assunto)";
+      const textBody = req.body["body-plain"] || req.body["stripped-text"] || "";
+      const htmlBody = req.body["body-html"] || req.body["stripped-html"] || "";
+
+      if (!recipient) {
+        console.log("Mailgun webhook: no recipient found", req.body);
+        return res.status(200).send("OK");
+      }
+
+      if (!storage.isAddressValid(recipient)) {
+        console.log("Mailgun webhook: address not valid or expired", recipient);
+        return res.status(200).send("OK");
+      }
+
+      const email = storage.addEmail({
+        to: recipient,
+        from: sender,
+        subject: subject,
+        textBody: textBody,
+        htmlBody: htmlBody,
+      });
+
+      notifyClients(recipient, "new_email", email);
+      console.log("Mailgun webhook: email received for", recipient);
+      
+      res.status(200).send("OK");
+    } catch (error) {
+      console.error("Mailgun webhook error:", error);
+      res.status(200).send("OK");
+    }
+  });
+
   return httpServer;
 }

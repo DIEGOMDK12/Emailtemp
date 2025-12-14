@@ -41,3 +41,8 @@ waitForPort = 5000
 [agent]
 integrations = ["javascript_websocket:1.0.0", "javascript_mem_db:1.0.0"]
 expertMode = true
+
+[userenv]
+
+[userenv.shared]
+MAILGUN_DOMAIN = "sandboxd171c29919ca443da5040be377e2321d.mailgun.org"
