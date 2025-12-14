@@ -62,6 +62,7 @@ export class MemStorage implements IStorage {
     const newEmail: Email = {
       ...email,
       id: randomUUID(),
+      timestamp: new Date().toISOString(),
       isRead: false,
     };
 

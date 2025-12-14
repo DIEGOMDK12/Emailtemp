@@ -11,7 +11,7 @@ export const emailSchema = z.object({
   isRead: z.boolean(),
 });
 
-export const insertEmailSchema = emailSchema.omit({ id: true, isRead: true });
+export const insertEmailSchema = emailSchema.omit({ id: true, isRead: true, timestamp: true });
 
 export const tempAddressSchema = z.object({
   address: z.string().email(),
