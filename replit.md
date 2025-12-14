@@ -2,7 +2,14 @@
 
 ## Overview
 
-TempMail is a temporary email service web application that allows users to generate disposable email addresses, receive emails in real-time, and manage their temporary inbox. The application provides privacy protection through automatically expiring email addresses (10-minute lifetime) and features a clean, responsive interface optimized for both desktop and mobile use.
+TempMail is a fully functional temporary email service web application that allows users to generate disposable email addresses, receive emails in real-time via WebSocket, and manage their temporary inbox. The application provides privacy protection through automatically expiring email addresses (10-minute lifetime) and features a clean, responsive interface optimized for both desktop and mobile use.
+
+## Recent Changes (December 2024)
+- Implemented complete backend with API routes for email management
+- Added WebSocket support for real-time email notifications
+- Connected frontend to backend APIs (removed mock data)
+- Fixed timestamp generation to be server-side
+- All CRUD operations working: generate address, receive emails, delete emails
 
 ## User Preferences
 
