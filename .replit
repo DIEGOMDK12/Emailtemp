@@ -48,4 +48,4 @@ expertMode = true
 [userenv]
 
 [userenv.shared]
-MAILGUN_DOMAIN = "sandboxd171c29919ca443da5040be377e2321d.mailgun.org"
+MAILGUN_DOMAIN = "contastore.shop"
